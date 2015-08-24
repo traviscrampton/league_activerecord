@@ -1,0 +1,26 @@
+<h1><%= @team.name() %> - <%= @team.coord_name() %></h1>
+
+<% @team.players().each() do |player| %>
+  <li><%= player.name() %></li>
+<% end %>
+
+<br>
+
+<h5>Add A New Player</h5>
+<form id="Add_Player" action="/teams/<%= @team.id() %>" method="post">
+  <label for="player_name">Player Name:</label>
+  <input type="text" name="player_name" id='player_name'>
+  <button type="submit">Add Player</button>
+</form>
+
+<form id="delete_player" action="/teams/<%= @team.id() %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+
+  <select id="players_delete" name="players_delete">
+    <% @team.players.each() do |player| %>
+      <option value='<%= player.id() %>'><%= player.name() %></option>
+    <% end %>
+  </select>
+
+  <button type="submit">Delete</button>
+</form>
