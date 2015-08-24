@@ -1,4 +1,5 @@
 require('rspec')
+require('pry')
 require('pg')
 require('sinatra/activerecord')
 require('player')
