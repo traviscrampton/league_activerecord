@@ -1,15 +1,10 @@
-require("rspec")
-require("pg")
-require("sinatra/activerecord")
-require("list")
-require("task")
+class Player <ActiveRecord:: Base
+  scope(:active_roster, -> do
+    where({:active => true})
+  end)
 
-ENV['RACK_ENV'] = 'test'
-
-RSpec.configure do |config|
-  config.after(:each) do
-    Task.all().each() do |task|
-      task.destroy()
-    end
-  end
+  scope(:inactive_roster, -> do
+    where({:active => false})
+  end)
+  belongs_to(:team)
 end
