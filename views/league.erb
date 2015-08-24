@@ -1,0 +1,52 @@
+<h4>League Coordinator Dashboard</h4>
+
+<ul>
+  <% @teams.each() do |team| %>
+    <li><%= team.name() %> - <%= team.coord_name() %></li>
+  <% end %>
+</ul>
+
+<br>
+<h5>Add a new team:</h5>
+<form id="add_team" action="/league" method="post">
+  <label for="team_name">Team Name:</label>
+  <input type="text" name="team_name" id='team_name'>
+  <label for="coord_name">Team Coordinator Name:</label>
+  <input type="text" name="coord_name" id="coord_name">
+  <button type="submit">Add team</button>
+</form>
+
+<br>
+
+<form id="update_team" action="/league" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <select id="teams" name="teams">
+    <% @teams.each() do |team| %>
+      <option value='<%= team.id() %>'><%= team.name() %></option>
+    <% end %>
+  </select>
+
+  <label for="update_name">Update name</label>
+  <input type="text" name="update_name" id="update_name">
+
+  <label for="update_coord">Update Coordinator</label>
+  <input type="text" name="update_coord" id='update_coord'>
+  <button type="submit">Update</button>
+
+</form>
+
+<form id="delete_team" action="/league" method="post">
+  <input type="hidden" name="_method" value="delete">
+
+  <select id="teams_delete" name="teams_delete">
+    <% @teams.each() do |team| %>
+      <option value='<%= team.id() %>'><%= team.name() %></option>
+    <% end %>
+  </select>
+
+  <button type="submit">Delete</button>
+</form>
+
+<a href="/index">Home</a>
+<a href="/teams">Coordinator Page</a>
